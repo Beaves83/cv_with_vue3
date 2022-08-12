@@ -1,13 +1,13 @@
 import {
   render, screen, fireEvent,
 } from '@testing-library/vue';
-import IncrementButton from '@/components/generics/buttons/IncrementButton.vue';
+import IncrementButtonAdvance from '@/components/generics/buttons/IncrementButtonAdvance.vue';
 
 test('increments value on click', async () => {
   // The `render` method renders the component into the document.
   // It also binds to `screen` all the available queries to interact with
   // the component.
-  render(IncrementButton);
+  render(IncrementButtonAdvance);
 
   // queryByText returns the first matching node for the provided text
   // or returns null.
