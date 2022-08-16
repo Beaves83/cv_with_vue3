@@ -1,28 +1,57 @@
+
 import {
   render, screen, fireEvent,
 } from '@testing-library/vue';
 import IncrementButton from '@/components/generics/buttons/IncrementButton.vue';
 
-test('increments value on click', async () => {
-  // The `render` method renders the component into the document.
-  // It also binds to `screen` all the available queries to interact with
-  // the component.
-  render(IncrementButton);
+describe('IncrementButton component', () => {
+  test('renders a button', async () => {
+    render(IncrementButton);
 
-  // queryByText returns the first matching node for the provided text
-  // or returns null.
-  expect(screen.queryByText('Times clicked: 0')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Increment' })).toBeTruthy();
+  });
 
-  // getByText returns the first matching node for the provided text
-  // or throws an error.
-  const button = screen.getByText('Increment');
+  test('renders a title indicating the number of clicks', async () => {
+    render(IncrementButton);
 
-  // Click a couple of times.
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
+    expect(screen.getByText('Times clicked: 0')).toBeTruthy();
+  });
 
-  expect(screen.queryByText('Times clicked: 5')).toBeTruthy();
+  test('increments value on click', async () => {
+    render(IncrementButton);
+
+    const button = screen.getByRole('button', { name: 'Increment' });
+
+    // Click a couple of times.
+    await fireEvent.click(button);
+    await fireEvent.click(button);
+
+    expect(screen.getByText('Times clicked: 2')).toBeTruthy();
+  });
+
+  test('renders a congrat message if the user increments the value 3 or more times', async () => {
+    render(IncrementButton);
+
+    const button = screen.getByRole('button', { name: 'Increment' });
+
+    await fireEvent.click(button);
+    await fireEvent.click(button);
+    await fireEvent.click(button);
+
+    expect(screen.getByText('Congrats! You clicked 3 times in a row!')).toBeTruthy();
+
+    await fireEvent.click(button);
+
+    expect(screen.getByText('Congrats! You clicked 4 times in a row!')).toBeTruthy();
+  });
+
+  test('does not render a congrat message if the user increments the value fewer than 3 times', async () => {
+    render(IncrementButton);
+
+    const button = screen.getByRole('button', { name: 'Increment' });
+
+    await fireEvent.click(button);
+
+    expect(screen.queryByText(/Congrats! You/)).not.toBeTruthy();
+  });
 });

@@ -2,6 +2,7 @@
 <div>
     <p>Times clicked: {{ count }}</p>
     <button @click="count++">Increment</button>
+    <p v-if="count >= 3">Congrats! You clicked {{ count }} times in a row! </p>
 </div>
 </template>
 
