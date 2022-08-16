@@ -1,0 +1,31 @@
+[
+    {
+      "title": "Kraven the Hunter",
+      "studio": "Marvel Entertainment",
+      "year": 2023,
+      "director": "J. C. Chandor",
+      "cast_and_crew": "Richard Wenk, Art Marcum, Matt Holloway (screenplay); Aaron Taylor-Johnson, Russell Crowe, Fred Hechinger, Ariana DeBose, Christopher Abbott, Alessandro Nivola"
+    },
+    {
+        "title": "Megan",
+        "studio": "Universal Pictures",
+        "year": 2023,
+        "director": "Gerald Johnstone",
+        "cast_and_crew": "Akela Cooper (screenplay); Allison Williams, Ronny Chieng, Violet McGraw, Brian Jordan Alvarez, Amie Donald, Kimberley Crossman"
+    },
+    {
+        "title": "Harold and the Purple Crayon",
+        "studio": "Davis Entertainment",
+        "year": 2023,
+        "director": "David Guion",
+        "cast_and_crew": "Zachary Levi, Lil Rel Howery, Zooey Deschanel"
+    },
+    {
+        "title": "Distant",
+        "studio": "DreamWorks Pictures",
+        "year": 2023,
+        "director": "Josh Gordon & Will Speck",
+        "cast_and_crew": "Spenser Cohen (screenplay); Anthony Ramos, Naomi Scott, Zachary Quinto"
+    }
+  ]
+  

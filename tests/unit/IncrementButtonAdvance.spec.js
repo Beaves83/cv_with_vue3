@@ -3,26 +3,28 @@ import {
 } from '@testing-library/vue';
 import IncrementButtonAdvance from '@/components/generics/buttons/IncrementButtonAdvance.vue';
 
-test('increments value on click', async () => {
-  // The `render` method renders the component into the document.
-  // It also binds to `screen` all the available queries to interact with
-  // the component.
-  render(IncrementButtonAdvance);
+describe('IncrementButtonAdvance component', () => {
+  test('renders a button', async () => {
+    render(IncrementButtonAdvance);
 
-  // queryByText returns the first matching node for the provided text
-  // or returns null.
-  expect(screen.queryByText('Times clicked: 0')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Increment' })).toBeTruthy();
+  });
 
-  // getByText returns the first matching node for the provided text
-  // or throws an error.
-  const button = screen.getByText('Increment');
+  test('renders a title indicating the number of clicks', async () => {
+    render(IncrementButtonAdvance);
 
-  // Click a couple of times.
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
-  await fireEvent.click(button);
+    expect(screen.getByText('Times clicked: 0')).toBeTruthy();
+  });
 
-  expect(screen.queryByText('Times clicked: 5')).toBeTruthy();
+  test('increments value on click', async () => {
+    render(IncrementButtonAdvance);
+
+    const button = screen.getByRole('button', { name: 'Increment' });
+
+    // Click a couple of times.
+    await fireEvent.click(button);
+    await fireEvent.click(button);
+
+    expect(screen.queryByText('Times clicked: 2')).toBeTruthy();
+  });
 });
