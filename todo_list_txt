@@ -1,0 +1,10 @@
+//TODO List
+- Crear repositorio de componentes: botones, inputs, tablas, ....
+- Añadir librería de diseño y aplicar diseño
+- Sacar fetch a sitio correcto y añadirle todo por parámetro
+- Meter i18n para las traducciones
+- Testear todos los componentes
+- Realizar componentes que usen otros componentes
+- Mirar funcionalidad ultimas de Vue3 y usarlas
+- Crear fichero API para hacer todas las llamadas con urlbase,....
+- Renombrar bien ficheros y variables
