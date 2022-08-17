@@ -1,64 +1,31 @@
 <template>
- <h1>Vue 3 and Fetch Example</h1>
-
- <ul v-if="!loading && data && data.length">
-    <!-- <li v-for="post of data">
-      <p><strong></strong></p>
-      <p></p>
-    </li> -->
-    {{data}}
-  </ul>
-
-  <p v-if="loading">
+ <h1 >Vue 3 and Fetch Example</h1>
+ <table v-if="!loading && data && data.length">
+  <thead>
+    <tr>
+      <th> ID </th>
+      <th> name </th>
+      <th> email </th>
+      <th> city </th>
+      <th> address </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(item, index) of data" v-bind:key="index">
+      <td><strong>{{item.id}}</strong></td>
+      <td>{{item.name}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.address.city}}</td>
+      <td>{{item.address.street}} {{item.address.suite}}</td>
+    </tr>
+  </tbody>
+  </table>
+  <p v-if="loading && !error">
    Still loading..
   </p>
   <p v-if="error">
-
+    Error while we are getting the data.
   </p>
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th>
-                  Title
-                </th>
-                <th>
-                  Studio
-                </th>
-                <th>
-                  Year
-                </th>
-                <th>
-                  Director
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in elements" v-bind:key="index">
-                <td>
-                  {{  }}
-                </td>
-                <td>
-                  {{ }}
-                </td>
-                <td>
-                  {{  }}
-                </td>
-                <td>
-                  {{  }}
-                </td>
-                <!-- <td>
-                  <a href="#">
-                    Edit
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    Delete
-                  </a>
-                </td> -->
-              </tr>
-            </tbody>
-          </table>
 </template>
 
 <script>
@@ -71,48 +38,25 @@ export default {
     const loading = ref(true);
     const error = ref(null);
 
+    const headers = {
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    };
+
     function fetchData() {
       loading.value = true;
-      debugger;
-      // I prefer to use fetch
-      // you can use use axios as an alternative
-      return fetch('http://jsonplaceholder.typicode.com/posts', {
+      fetch('https://jsonplaceholder.typicode.com/users/', {
         method: 'get',
-        headers: {
-          'content-type': 'application/json',
-        },
+        headers,
       })
+        .then((res) => res.json())
         .then((res) => {
-          // a non-200 response code
-          debugger;
           if (!res.ok) {
-            // create error instance with HTTP status text
-            const error2 = new Error(res.statusText);
-            error2.json = res.json();
-            throw error2;
+            error.value = new Error(res.statusText);
           }
-
-          return res.json();
+          data.value = res;
         })
-        .then((json) => {
-          // set the response data
-          debugger;
-          data.value = json.data;
-        })
-        .catch((err) => {
-          debugger;
-          error.value = err;
-          // In case a custom JSON error response was provided
-          if (err.json) {
-            // return err.json.then((json) => {
-            //   // set the JSON response message
-            //   error.value.message = json.message;
-            // });
-          }
-        })
-        .then(() => {
-          loading.value = false;
-        });
+        .then(() => { loading.value = false; });
     }
 
     onMounted(() => {
@@ -123,6 +67,7 @@ export default {
       data,
       loading,
       error,
+      fetchData,
     };
   },
 };
