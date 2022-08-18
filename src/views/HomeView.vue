@@ -5,7 +5,7 @@
     <br />
     <br />
     <br />
-    <GenericList :elements="films" />
+    <GenericList :elements="films" :headers="headers" />
     <br />
     <br />
     <br />
@@ -32,6 +32,7 @@ export default {
   setup() {
     return {
       films,
+      headers: ['Title', 'Company', 'Year', 'Director', 'Characters'],
     };
   },
 };
